@@ -2,7 +2,6 @@ import React from 'react'
 import compose from 'recompose/compose'
 import withState from 'recompose/withState'
 import lifecycle from 'recompose/lifecycle'
-import moment from 'moment'
 
 import AppMap from './components/AppMap'
 import Sidebar from './components/Sidebar'
@@ -12,11 +11,7 @@ import ErrorBox from './components/ErrorBox'
 import {RESOURCE_URL} from './constants'
 import {shapeResponse} from './selectors'
 
-import mockedData from './mockedData.json'
-
 import './App.css'
-
-moment.locale('es')
 
 export const App = ({data, selected, setSelected, status}) => (
   <div className="App">
@@ -41,8 +36,8 @@ export const App = ({data, selected, setSelected, status}) => (
               <span className="title">{selected.name}</span>
               <div className="subtitle">{selected.region}</div>
               <p className='subtitle'>
-                Establecida <b>{moment(selected.stabilished, "YYYY").fromNow()}</b>, es un <b>{selected.type}</b>, con <b>{selected.integrants} integrantes</b>.
-                Con una superficie aproximada de <b>{parseFloat(selected.surface)} km</b>. La cobertura de electricidad es <b>{selected.electricity}</b>,
+                Establecida <b>{selected.stabilished}</b>, es un <b>{selected.type}</b>, con <b>{selected.integrants} integrantes</b>.
+                Con una superficie aproximada de <b>{selected.surface} mts</b>. La cobertura de electricidad es <b>{selected.electricity}</b>,
                 la de iluminacion publica es <b>{selected.street_electricity}</b>, la de agua <b>{selected.water}</b>, la de cloacas <b>{selected.sewer}</b> y la de gas <b>{selected.gas}</b>.
               </p>
             </div>
@@ -67,14 +62,14 @@ export const AppHOC = compose(
   withState(
     'data',
     'setData',
-    shapeResponse(mockedData)
+    null
   ),
   withState(
     'status',
     'setStatus',
-    'success'
+    'init'
   ),
-  /* lifecycle({
+  lifecycle({
     async componentDidMount () {
       const request = await fetch(RESOURCE_URL)
       const response = await request.json()
@@ -85,7 +80,7 @@ export const AppHOC = compose(
         this.props.setStatus('failure')
       }
     }
-  }) */
+  })
 )
 
 export default AppHOC(App)

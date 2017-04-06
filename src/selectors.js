@@ -1,5 +1,8 @@
 import R from 'ramda'
 import fuzzy from 'fuzzy'
+import moment from 'moment'
+
+moment.locale('es')
 
 export const shapeResponse = response => ({
   category: response.category_name,
@@ -29,9 +32,9 @@ export const shapeResponse = response => ({
       created: item[9],
       name: item[10],
       type: item[11],
-      stabilished: item[12],
+      stabilished: moment(item[12], "YYYY").fromNow(),
       integrants: item[13],
-      surface: item[14],
+      surface: parseFloat(item[14]) * 100,
       direction: item[15],
       electricity: item[16],
       street_electricity: item[17],
