@@ -47,4 +47,4 @@ export const shapeResponse = response => ({
 })
 
 export const filterItemsByName = (criteria, list) => fuzzy
-  .filter(criteria, list, {extract: item => item.name})
+  .filter(criteria, list, {extract: item => item.name + item.city + item.region})
