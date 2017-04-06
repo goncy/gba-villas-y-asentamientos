@@ -1,0 +1,47 @@
+.Sidebar {
+  width: 100%;
+  max-width: 350px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+.Sidebar ul {
+  margin: 0;
+  padding: 0;
+  max-height: 100%;
+  overflow-y: auto;
+  margin-top: -1px;
+}
+
+.Sidebar ul li {
+  list-style: none;
+  text-align: left;
+  padding: 10px 10px;
+  border-top: 1px solid lightgray;
+  background: ghostwhite;
+  cursor: pointer;
+}
+
+.Sidebar ul li:hover {
+  background: lavender;
+}
+
+.Sidebar ul li.selected {
+  background: palegreen;
+}
+
+.Sidebar .search {
+  height: 20px;
+  font-size: large;
+  padding: 10px;
+  border: 1px solid white;
+  border-bottom: 1px solid gainsboro;
+  box-shadow: none;
+  z-index: 2;
+}
+
+.Sidebar .search:focus {
+  border: 1px solid white !important;
+  box-shadow: none;
+}
