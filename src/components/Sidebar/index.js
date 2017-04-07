@@ -6,7 +6,7 @@ import {filterItemsByName} from '../../selectors'
 
 import './Sidebar.css'
 
-export const Sidebar = ({data: {items}, setSelected, selected, search, setSearch}) => (
+export const Sidebar = ({data: {items}, setSelected, selected, search, setSearch, setShowAll, showAll}) => (
   <div className='Sidebar'>
     <input
       className='search'
@@ -14,6 +14,25 @@ export const Sidebar = ({data: {items}, setSelected, selected, search, setSearch
       type="text"
     />
     <ul>
+      {!showAll ? (
+        <li
+          onClick={() => setShowAll(true)}
+          className="all show"
+        >
+          <span>
+            VER TODAS LAS VILLAS Y ASENTAMIENTOS
+          </span>
+        </li>
+      ) : (
+        <li
+          onClick={() => setShowAll(false)}
+          className="all hide"
+        >
+          <span>
+            OCULTAR TODAS LAS VILLAS Y ASENTAMIENTOS
+          </span>
+        </li>
+      )}
       {filterItemsByName(search, items)
         .map(({original: result}, index) => (
           <li

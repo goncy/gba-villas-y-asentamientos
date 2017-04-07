@@ -48,3 +48,13 @@ export const shapeResponse = response => ({
 
 export const filterItemsByName = (criteria, list) => fuzzy
   .filter(criteria, list, {extract: item => item.name + item.city + item.region})
+
+export const centerPolygon = (library, map, item) => {
+  if (!item) return
+  const bounds = new library.LatLngBounds()
+  item.coordinates
+    .map(bound => {
+      bounds.extend(bound)
+    })
+  map.fitBounds(bounds)
+}

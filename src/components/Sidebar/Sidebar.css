@@ -45,3 +45,17 @@
   border: 1px solid white !important;
   box-shadow: none;
 }
+
+.Sidebar .all {
+  text-align: center;
+  font-family: 'Rubik', sans-serif;
+  font-size: 1rem;
+}
+
+.Sidebar .all.show {
+  background: greenyellow;
+}
+
+.Sidebar .all.hide {
+  background: crimson;
+}

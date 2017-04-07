@@ -11,9 +11,11 @@ import ErrorBox from './components/ErrorBox'
 import {RESOURCE_URL} from './constants'
 import {shapeResponse} from './selectors'
 
+import mockedData from './mockedData.json'
+
 import './App.css'
 
-export const App = ({data, selected, setSelected, status}) => (
+export const App = ({data, selected, setSelected, status, showAll, setShowAll}) => (
   <div className="App">
     {/* PENDING */}
     {['init', 'pending'].includes(status) && <Spinner />}
@@ -24,11 +26,16 @@ export const App = ({data, selected, setSelected, status}) => (
         <Sidebar
           selected={selected}
           setSelected={setSelected}
+          showAll={showAll}
+          setShowAll={setShowAll}
           data={data}
         />
         <div className="mapContainer">
           <AppMap
             selected={selected}
+            setSelected={setSelected}
+            showAll={showAll}
+            setShowAll={setShowAll}
             data={data}
           />
           {selected && (
@@ -62,14 +69,19 @@ export const AppHOC = compose(
   withState(
     'data',
     'setData',
-    null
+    shapeResponse(mockedData)
   ),
   withState(
     'status',
     'setStatus',
-    'init'
+    'success'
   ),
-  lifecycle({
+  withState(
+    'showAll',
+    'setShowAll',
+    false
+  ),
+  /* lifecycle({
     async componentDidMount () {
       const request = await fetch(RESOURCE_URL)
       const response = await request.json()
@@ -80,7 +92,7 @@ export const AppHOC = compose(
         this.props.setStatus('failure')
       }
     }
-  })
+  }) */
 )
 
 export default AppHOC(App)
